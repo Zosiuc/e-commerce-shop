@@ -1,0 +1,48 @@
+<style>
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h1 {margin: 10px;}
+    }
+
+    .container {
+        margin: 0 400px;
+        padding: 20px;
+        align-items: end;
+        justify-content: center;
+        background-color: #6f94c6;
+
+        ul li img { width: 60px; height:60px;}
+
+    }
+    .delete {
+        margin: 20px;
+    }
+</style>
+<nav>
+    <h1 >🛒 Winkelmand</h1>
+    <a href="{% url 'product_list' %}">← Terug naar producten</a>
+</nav>
+
+<div class="container">
+    {% if cart_items %}
+    <ul >
+        {% for item in cart_items %}
+        <li >
+            <img src="{{ item.image.url }}" alt="{{ product.name }}">
+            <strong>{{ item.product.name }}</strong> – €{{ item.product.price }} x {{ item.quantity }} =
+            <strong>€{{ item.total }}</strong>
+            <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
+                {% csrf_token %}
+                <button class="delete" type="submit">🗑️ Verwijder</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <p><strong>Totaal:</strong> €{{ total_price }}</p>
+        {% else %}
+    <p>Winkelmandje is leeg.</p>
+    {% endif %}
+</div>
+

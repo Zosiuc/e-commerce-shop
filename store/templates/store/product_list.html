@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Producten</title>
+    <style>
+        body { font-family: sans-serif; }
+        .header {position: static; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: rgba(83, 125, 143, 0.66)
+        }
+        .header a button { border: 1px solid #ddd; border-radius: 15px; padding: 3px; width: 120px; height:60px; background-color: rgba(162, 211, 232, 0.56); transition: 0.8s;
+            &:hover { scale: 1.1; background-color: #3f7873; color:white;
+            }
+        }
+        .container {display: flex; flex-direction: row; flex-wrap: wrap; margin: 7px;}
+        .product { border: 1px solid #ddd; border-radius: 15px; padding: 16px; margin: 16px; width: 200px;background-color: rgba(63, 177, 227, 0.56)
+        }
+        img {  width: 120px; height: auto; margin: 0 20%;}
+        p { word-break: break-word}
+        .add { width:50px; height: 40px; border-radius: 15px; background-color: white; color: #1b1b1b;transition: 0.8s;
+         &:hover {scale: 1.1; background-color: #3f7873; color:white;}
+        }
+    </style>
+</head>
+<body>
+<nav class="header">
+    <h1>Producten</h1>
+    <a href="{% url 'view_cart' %}" >
+        <button>🛒 Winkelmandje</button>
+    </a>
+</nav>
+
+<div class="container">
+
+{% for product in products %}
+<div class="product">
+    <h2>{{ product.name }}</h2>
+    <p>Prijs: €{{ product.price }}</p>
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    {% endif %}
+    <p>{{ product.description }}</p>
+    <form method="post" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+        <button class="add" type="submit">➕</button>
+    </form>
+</div>
+{% empty %}
+<p>Geen producten gevonden.</p>
+{% endfor %}
+</div>
+</body>
+</html>
