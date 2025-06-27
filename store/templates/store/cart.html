@@ -1,41 +1,73 @@
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
     nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #6f94c6;
+        padding: 20px;
         h1 {margin: 10px;}
     }
 
-    .container {
-        margin: 0 400px;
+    .myContainer {
+        margin: 4px 0;
         padding: 20px;
         align-items: end;
         justify-content: center;
         background-color: #6f94c6;
-
+        height: 100%;
         ul li img { width: 60px; height:60px;}
 
     }
-    .delete {
-        margin: 20px;
-    }
+
 </style>
+
 <nav>
     <h1 >🛒 Winkelmand</h1>
     <a href="{% url 'product_list' %}">← Terug naar producten</a>
 </nav>
 
-<div class="container">
+<section class="myContainer">
     {% if cart_items %}
     <ul >
         {% for item in cart_items %}
         <li >
-            <img src="{{ item.image.url }}" alt="{{ product.name }}">
-            <strong>{{ item.product.name }}</strong> – €{{ item.product.price }} x {{ item.quantity }} =
+            <img src="{{ item.image }}" alt="{{ product.name }}">
+            <strong>{{ item.product.name }}</strong>
+            <div class="flex flex-row gap-[5px]">
+            <strong>€{{ item.product.price }}</strong> x
+            <form method="post" action="{% url 'update_cart_quantity' item.product.id %}" class="cart-update-form">
+                {% csrf_token %}
+                <label>
+                    <input
+                            type="number"
+                            name="quantity"
+                            min="1"
+                            step="1"
+                            value="{{ item.quantity }}"
+                            class="bg-transparent w-12 text-center border rounded quantity-input"
+                    >
+                </label>
+            </form>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const quantityInputs = document.querySelectorAll('.quantity-input');
+
+                    quantityInputs.forEach(input => {
+                        input.addEventListener('change', function () {
+                            const form = input.closest('form');
+                            if (form) {
+                                form.submit();
+                            }
+                        });
+                    });
+                });
+            </script> =
             <strong>€{{ item.total }}</strong>
+            </div>
             <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
                 {% csrf_token %}
-                <button class="delete" type="submit">🗑️ Verwijder</button>
+                <button class="h-[25px] w-[120px] rounded-xl bg-sky-100 hover:scale-[1.1] duration-500 " type="submit">🗑️ Verwijder</button>
             </form>
         </li>
         {% endfor %}
@@ -44,5 +76,5 @@
         {% else %}
     <p>Winkelmandje is leeg.</p>
     {% endif %}
-</div>
+</section>
 
