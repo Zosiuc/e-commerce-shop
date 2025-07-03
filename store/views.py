@@ -1,6 +1,89 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product  # pas aan op basis van je model
+from .models import Product, Order, OrderItem, Category  # pas aan op basis van je model
 from django.views.decorators.http import require_POST
+import stripe
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponse
+from django.urls import reverse
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+@csrf_exempt
+def create_checkout_session(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        return render(request, 'store/cart.html')
+
+    line_items = []
+    order = Order.objects.create(user=request.user if request.user.is_authenticated else None)
+
+    for product_id, item in cart.items():
+        product = Product.objects.get(pk=product_id)
+        # Haal quantity uit item, of item zelf als int
+        if isinstance(item, dict):
+            quantity = int(item.get('quantity', 1))
+        else:
+            quantity = int(item)
+
+        line_items.append({
+            'price_data': {
+                'currency': 'eur',
+                'unit_amount': int(float(product.price) * 100),
+                'product_data': {'name': product.name},
+            },
+            'quantity': quantity,
+        })
+
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=quantity,
+            price=product.price
+        )
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=line_items,
+        mode='payment',
+        success_url=request.build_absolute_uri(reverse('success')) + '?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url=request.build_absolute_uri(reverse('cancel')),
+    )
+    order.stripe_session_id = session.id
+    order.save()
+
+    return redirect(session.url, code=303)
+
+
+def success(request):
+    session_id = request.GET.get('session_id')
+    print("Ontvangen session_id:", session_id)
+    if not session_id:
+        return redirect('product_list')
+
+    try:
+        order = Order.objects.get(stripe_session_id=session_id)
+        order.paid = True
+        order.save()
+        request.session['cart'] = {}  # Leeg het winkelmandje
+    except Order.DoesNotExist:
+        print("Order met deze session_id bestaat niet!")
+
+    return render(request, 'store/success.html')
+
+
+def cancel(request):
+    return render(request, 'store/cancel.html')
+
+
+def home_view(request):
+    recent_orders = []
+    categories = Category.objects.all()
+    if request.user.is_authenticated:
+        recent_orders = Order.objects.filter(user=request.user, paid=True).order_by('-created_at')[:5]
+    return render(request, 'store/home.html', {'recent_orders': recent_orders, 'categories':categories})
 
 
 def product_list(request):
@@ -25,7 +108,8 @@ def add_to_cart(request, product_id):
         }
 
     request.session['cart'] = cart
-    return redirect('view_cart')
+
+    return redirect('product_list')
 
 
 def remove_from_cart(request, product_id):
@@ -73,7 +157,6 @@ def view_cart(request):
     })
 
 
-
 @require_POST
 def update_cart_quantity(request, product_id):
     quantity = int(request.POST.get('quantity', 1))
@@ -92,3 +175,14 @@ def update_cart_quantity(request, product_id):
         request.session['cart'] = cart
     return redirect('view_cart')
 # Create your views here.
+
+
+@login_required
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, paid=True).order_by('-created_at')
+    return render(request, 'store/my_orders.html', {'orders': orders})
+
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'store/product_detail.html', {'product': product})

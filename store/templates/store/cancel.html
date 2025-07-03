@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Order Payment {% endblock %}
+{% block content %}
+
+
+<h1 class="text-red-600 text-2xl font-bold">❌ Betaling geannuleerd</h1>
+<p>Je hebt de betaling geannuleerd.</p>
+<a href="{% url 'view_cart' %}">Terug naar je winkelmandje</a>
+
+{% endblock content %}

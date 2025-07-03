@@ -1,55 +1,56 @@
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-    <title>Producten</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: sans-serif; }
-        .header {position: static; display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #6f94c6;
-        }
-        .header a button { border: 1px solid #ddd; border-radius: 15px; padding: 3px; width: 120px; height:60px; background-color: rgba(162, 211, 232, 0.56); transition: 0.8s;
-            &:hover { scale: 1.1; background-color: #3f7873; color:white;
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Products {% endblock %}
+
+{% block content %}
+<div class="products_container">
+    <nav class="products_header">
+        <h1>Producten</h1>
+        <a href="{% url 'view_cart' %}" >
+            <button>Winkelmandje</button>
+        </a>
+    </nav>
+    {% if product_toegevoegd %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        Swal.fire({
+            title: 'Toegevoegd aan winkelwagen!',
+            text: "Wil je doorgaan naar de winkelwagen?",
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Ja, naar winkelwagen',
+            cancelButtonText: 'Verder winkelen'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/winkelwagen/";
             }
-        }
-        .container {display: flex; flex-direction: row; flex-wrap: wrap; margin: 7px;}
-        .product { border: 1px solid #ddd; border-radius: 15px; padding: 16px; margin: 16px; width: 200px;background-color: rgba(152, 198, 218, 0.42);
-            &:hover { background-color: rgba(125, 157, 200, 0.6)
-            }
-        }
-        img {  width: 120px; height: auto; margin: 0 20%;}
-        p { word-break: break-word}
-        .add { border: none; width:50px; height: 40px; font-size: larger; border-radius: 15px; background-color: white; color: #1b1b1b;transition: 0.8s;
-         &:hover {scale: 1.1; background-color: #23a294; color:white;}
-        }
-    </style>
-</head>
-<body>
-<nav class="header">
-    <h1>Producten</h1>
-    <a href="{% url 'view_cart' %}" >
-        <button>🛒 Winkelmandje</button>
-    </a>
-</nav>
-
-<div class="container">
-
-{% for product in products %}
-<div class="product flex flex-col gap-[20px]">
-    <h2>{{ product.name }}</h2>
-    <p>Prijs: €{{ product.price }}</p>
-    {% if product.image %}
-    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        });
+    </script>
     {% endif %}
-    <p>{{ product.description }}</p>
-    <form method="post" action="{% url 'add_to_cart' product.id %}">
-        {% csrf_token %}
-        <button class="add bg-blue-200 m-[12px] h-[30px] w-[90%] rounded-xl shadow " type="submit">+</button>
-    </form>
+
+    <div class="content_pro" >
+
+        {% for product in products %}
+        <a class="product " href="{% url 'product_detail' product.id %}">
+            <h2>{{ product.name }}</h2>
+            <p>Prijs: €{{ product.price }}</p>
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <p>{{ product.description }}</p>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button class="add  " type="submit" >+</button>
+            </form>
+        </a>
+        {% empty %}
+        <p>Geen producten gevonden.</p>
+        {% endfor %}
+    </div>
 </div>
-{% empty %}
-<p>Geen producten gevonden.</p>
-{% endfor %}
-</div>
-</body>
-</html>
+{% endblock %}

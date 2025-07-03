@@ -1,11 +1,18 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, Category, Order, OrderItem
 from django.utils.html import format_html
+
+# Register your models here.
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'created_at', 'image_tag')
+    list_display = ('name', 'price','category', 'created_at', 'image_tag','new')
 
     def image_tag(self, obj):
         if obj.image:
@@ -17,4 +24,18 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.site_header = "MyShop Admin"
 admin.site.site_title = "MyShop Dashboard"
-# Register your models here.
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    readonly_fields = ['product', 'quantity', 'price']
+    can_delete = False
+    extra = 0
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'created_at', 'paid']
+    inlines = [OrderItemInline]
+
+

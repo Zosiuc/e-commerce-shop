@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Order Payment {% endblock %}
+{% block content %}
+
+
+<h1 class="text-green-600 text-2xl font-bold">✅ Betaling gelukt!</h1>
+<p>Bedankt voor je aankoop!</p>
+<a href="{% url 'product_list' %}">Terug naar de shop</a>
+
+{% endblock content %}

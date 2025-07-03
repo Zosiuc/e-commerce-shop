@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/globale.css' %}">
+    <title>{% block title %} Shop {% endblock %}</title>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Welkom op zosiuc website</h1>
+        <nav>
+            <a href="/">Home</a> |
+            <a href="/contact/">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Subpagina's vullen deze ruimte -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        &copy; 2025 Zosiuc Software
+    </footer>
+</body>
+</html>

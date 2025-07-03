@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}  Product Details {% endblock %}
+
+{% block content %}
+<div class="cart_container" >
+
+    <nav>
+        <h1 >Product Details</h1>
+    </nav>
+
+    <section class="cart_list">
+        {% if product %}
+        <img src="{{product.image.url}}" alt="{{product.name}}" class="w-[400px]">
+        <div class="flex flex-col ">
+            <h2>Artikel Name: <strong> {{product.name}}</strong></h2>
+            <h2>Price: <strong> €{{product.price}}</strong></h2>
+        </div>
+
+        <ul>
+
+            <li>Category: {{product.category.name}}</li>
+            <li>Description: {{product.description}}</li>
+            {% if product.new %} <li>New</li>{% endif %}
+
+        </ul>
+
+        {% endif %}
+    </section>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="home_container">
+    <section class="hero_container">
+        <img src="{% static 'images/Icon.svg' %}" alt="zosiuc icon">
+        <div class="hero">
+            <h1>Welkom op de Zosiuc Store!</h1>
+            <p>Waar je jouw tijd besparen kunnen en online alles kunnen vinden </p>
+        </div>
+
+    </section>
+    <section class="features_container">
+        <nav>
+            <h2>Assortment</h2>
+            <a rel="shop" href="{% url 'product_list' %}">see all </a>
+        </nav>
+
+        <div class="features">
+            {% for category in categories %}
+            <div class="feature">{{category.name}}</div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="features_container">
+        <nav>
+            <h2>New added</h2>
+            <a rel="new" href="{% url 'product_list' %}">see all </a>
+        </nav>
+
+        <div class="features">
+            <div class="feature">feature</div>
+            <div class="feature">feature</div>
+            <div class="feature">feature</div>
+            <div class="feature">feature</div>
+            <div class="feature">feature</div>
+            <div class="feature">feature</div>
+        </div>
+    </section>
+    <section class="features_container">
+
+        <nav>
+            <h2 class="text-lg font-semibold mb-2"> Jouw recente bestellingen</h2>
+            <a rel="recent" href="{% url 'product_list' %}">see all</a>
+        </nav>
+        {% if recent_orders %}
+        <div class=" bg-white shadow rounded-lg p-4 mb-6">
+            <ul class="flex flex-row space-y-2 text-sm text-gray-800 gap-20 overflow-hidden">
+                {% for order in recent_orders %}
+                <li class="border-b pb-1 ">
+                    <strong>Bestelling {{ order.id }}</strong> – {{ order.created_at|date:"d M Y" }}
+                    <ul class="ml-4 text-xs text-gray-600 p-5">
+                        {% for item in order.items.all %}
+                        <li>{{ item.quantity }}× {{ item.product.name }} (€{{ item.price }})</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'my_orders' %}" class="text-blue-600 hover:underline mt-2 inline-block text-sm">Bekijk alle
+                bestellingen →</a>
+        </div>
+        {% endif %}
+    </section>
+
+</div>
+{% endblock %}
