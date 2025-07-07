@@ -3,35 +3,41 @@
 
 {% block title %} Your Orders {% endblock %}
 
-{% block content %}
-<div class="cart_container" >
+{% block article %}
 
-    <nav>
-        <h1 >Recent Orders</h1>
-        <a href="{% url 'home' %}">← Terug naar Home</a>
-    </nav>
+<nav class="second_header">
+    <h1>Recent Orders</h1>
+    <a href="{% url 'home' %}">← Terug naar Home</a>
+</nav>
 
-    <section class="cart_list">
-        {% if orders %}
-        <ul class="space-y-2 text-sm text-gray-800">
-            {% for order in orders %}
-            <li class="flex flex-col border-b p-4 gap-4 ">
-                {{ order.created_at|date:"d M Y" }}
-                <strong>Ordernummer {{ order.id }}</strong>
-                <ul class="flex w-full px-[4px] mx-[4px] text-md text-gray-600 gap-[120px] overflow-scroll ">
-                    {% for item in order.items.all %}
-                    <a href="{% url 'product_detail' item.id %}">
-                    <li class="flex flex-row gap-[4px] w-[320px]" ><img src="{{ item.product.image.url }}" alt="{{item.product}}" class="w-[80px] "> {{ item.quantity }}× {{ item.product }} (€{{ item.price }})</li>
-                    </a>
-                    {% endfor %}
-                </ul>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p class="">no orders yet</p>
-        {% endif %}
-    </section>
-</div>
+<section class="cart_list">
+    {% if orders %}
+    <ul class="space-y-2 text-sm text-gray-800">
+        {% for order in orders %}
+        <li class="flex flex-col border-b p-4 gap-4 ">
+            {{ order.created_at|date:"d M Y" }}
+            <strong>Ordernummer {{ order.id }}</strong>
+            <ul class="flex w-full px-[4px] mx-[4px] text-md text-gray-600 gap-[120px] overflow-scroll ">
+                {% for item in order.items.all %}
+                {% if item.product and item.product.id %}
+                <a href="{% url 'product_detail' product_id=item.product.id  %}">
+                    <li class="flex flex-row gap-[4px] w-[320px]"><img src="{{ item.product.image.url }}"
+                                                                       alt="{{item.product}}" class="w-[80px] "> {{ item.quantity }} × {{ item.product }} (€{{ item.price }})
+                    </li>
+                </a>
+                {% else %}
+                <span class="text-red-500">No product found</span>
+                {% endif %}
 
-{% endblock content %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="">no orders yet</p>
+    {% endif %}
+</section>
+
+
+{% endblock article %}

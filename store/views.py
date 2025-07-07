@@ -1,7 +1,10 @@
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Order, OrderItem, Category  # pas aan op basis van je model
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -79,15 +82,24 @@ def cancel(request):
 
 
 def home_view(request):
-    recent_orders = []
     categories = Category.objects.all()
+    products = Product.objects.all()
+    recent_orders = []
     if request.user.is_authenticated:
         recent_orders = Order.objects.filter(user=request.user, paid=True).order_by('-created_at')[:5]
-    return render(request, 'store/home.html', {'recent_orders': recent_orders, 'categories':categories})
+    return render(request, 'store/home.html', {'products': products, 'categories': categories, 'recent_orders': recent_orders})
 
 
-def product_list(request):
-    products = Product.objects.all()
+def product_list(request, filterterm):
+
+    if filterterm == 'all':
+        products = Product.objects.all()
+
+    elif filterterm == 'new':
+        products = Product.objects.filter(new=True)
+
+    else:
+        products = Product.objects.filter(category__name__icontains=filterterm)
     return render(request, 'store/product_list.html', {'products': products})
 
 
@@ -109,7 +121,7 @@ def add_to_cart(request, product_id):
 
     request.session['cart'] = cart
 
-    return redirect('product_list')
+    return redirect('product_list', 'all')
 
 
 def remove_from_cart(request, product_id):
@@ -186,3 +198,28 @@ def my_orders(request):
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     return render(request, 'store/product_detail.html', {'product': product})
+
+
+@require_GET
+def zoek_producten(request):
+    zoekterm = request.GET.get('q', '')
+    producten = Product.objects.filter(
+        Q(name__icontains=zoekterm) |
+        Q(description__icontains=zoekterm) |
+        Q(category__name__icontains=zoekterm)
+    )
+
+    data = list(producten.values('id', 'name', 'price'))
+    return JsonResponse(data, safe=False)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # log direct in na registratie
+            return redirect('home')  # of 'my_orders' etc.
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})

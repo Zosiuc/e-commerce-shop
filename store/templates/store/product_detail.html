@@ -3,31 +3,28 @@
 
 {% block title %}  Product Details {% endblock %}
 
-{% block content %}
-<div class="cart_container" >
+{% block article %}
 
-    <nav>
-        <h1 >Product Details</h1>
-    </nav>
+<nav class="second_header">
+    <h1>Product Details</h1>
+</nav>
 
-    <section class="cart_list">
-        {% if product %}
-        <img src="{{product.image.url}}" alt="{{product.name}}" class="w-[400px]">
-        <div class="flex flex-col ">
-            <h2>Artikel Name: <strong> {{product.name}}</strong></h2>
-            <h2>Price: <strong> €{{product.price}}</strong></h2>
-        </div>
+<section class="product_details ">
+    {% if product %}
 
-        <ul>
-
-            <li>Category: {{product.category.name}}</li>
-            <li>Description: {{product.description}}</li>
-            {% if product.new %} <li>New</li>{% endif %}
-
-        </ul>
-
+    <img src="{{product.image.url}}" alt="{{product.name}}">
+    <ul class="details">
+        <li>Artikel Name: <strong> {{product.name}}</strong></li>
+        <li>Price: <strong> €{{product.price}}</strong></li>
+        <li>Category: {{product.category.name}}</li>
+        <li>Description: {{product.description}}</li>
+        {% if product.new %}
+        <li class="new">New</li>
         {% endif %}
-    </section>
-</div>
+    </ul>
 
-{% endblock content %}
+    {% endif %}
+</section>
+
+
+{% endblock article %}

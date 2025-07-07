@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block title %} Order Payment {% endblock %}
-{% block content %}
 
 
-<h1 class="text-green-600 text-2xl font-bold">✅ Betaling gelukt!</h1>
-<p>Bedankt voor je aankoop!</p>
-<a href="{% url 'product_list' %}">Terug naar de shop</a>
+{% block article %}
+<section class="flex flex-col pt-[30%] items-center items-center">
+    <h1 class="rotate-90 text-green-600 text-2xl font-bold">:)</h1>
+    <h1 class="text-green-600 text-2xl font-bold"> Betaling gelukt!</h1>
+    <p>Bedankt voor je aankoop!</p>
+    <a href="{% url 'product_list' 'all' %}" class="text-blue-900 underline ">Terug naar de shop →</a>
+</section>
 
-{% endblock content %}
+{% endblock article %}

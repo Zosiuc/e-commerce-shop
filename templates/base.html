@@ -1,32 +1,68 @@
 <!DOCTYPE html>
 {% load static %}
-
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/globale.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <title>{% block title %} Shop {% endblock %}</title>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
-    <header>
-        <h1>Welkom op zosiuc website</h1>
-        <nav>
-            <a href="/">Home</a> |
-            <a href="/contact/">Contact</a>
-        </nav>
-    </header>
+<header>
+    <button type="button" onclick="toggleSide_bar()">
+        <img src="{%  static 'images/app.png' %}" alt="aside icon" class="w-[40px]  hover:scale-[1.06] duration-700"/>
+    </button>
+    <strong>
+        <a href="/"><img src="{% static 'images/Icon.svg' %}" alt="zosiuc icon" class="w-[40px]"></a>
+        <label class="search">
+            <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
+            <ul id="resultaten" class="hidden"></ul>
+        </label>
+    </strong>
 
-    <main>
-        {% block content %}
-        <!-- Subpagina's vullen deze ruimte -->
-        {% endblock %}
-    </main>
+</header>
 
-    <footer>
-        &copy; 2025 Zosiuc Software
-    </footer>
+
+<main >
+    <aside class="side_bar" id="side_bar">
+        <ul class="flex flex-col gap-[8px]">
+            <div class="flex flex-col gap-[4px]">
+                <strong>Profile</strong>
+                <ul class="links_group m-[4px]">
+                    {% if user.is_authenticated %}
+                    <p>Welkom, {{ user.username }}!</p>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="aside_link">Uitloggen</button>
+                    </form>
+                    {% else %}
+                    <li class="aside_link"><a href="{% url 'login' %}"> Login </a></li>
+                    <li class="aside_link"><a href="{% url 'register' %}">Sing up</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <span>______________</span>
+            <div class="flex flex-col gap-[4px]">
+                <strong>Contact</strong>
+                <ul class="links_group m-[4px]">
+                    <li class="aside_link"><a href="/contact/">Clant Service</a></li>
+                </ul>
+            </div>
+        </ul>
+    </aside>
+    <article>
+    {% block article %}
+    <!-- Subpagina's vullen deze ruimte -->
+    {% endblock article %}
+    </article>
+</main>
+
+
+
+<footer>
+    &copy; 2025 Zosiuc Software
+</footer>
 </body>
 </html>

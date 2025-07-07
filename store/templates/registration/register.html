@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Registration {% endblock %}
+
+{% block article %}
+<div class="register">
+  <h2>Account aanmaken</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registreren</button>
+  </form>
+  <p>Heb je al een account? <a href="{% url 'login' %}">Log in</a></p>
+</div>
+{% endblock article %}

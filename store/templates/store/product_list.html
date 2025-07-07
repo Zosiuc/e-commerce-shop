@@ -1,56 +1,54 @@
-
-
 {% extends "base.html" %}
 {% load static %}
 
 
 {% block title %} Products {% endblock %}
 
-{% block content %}
-<div class="products_container">
-    <nav class="products_header">
-        <h1>Producten</h1>
-        <a href="{% url 'view_cart' %}" >
-            <button>Winkelmandje</button>
-        </a>
-    </nav>
-    {% if product_toegevoegd %}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% block article %}
 
-    <script>
-        Swal.fire({
-            title: 'Toegevoegd aan winkelwagen!',
-            text: "Wil je doorgaan naar de winkelwagen?",
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonText: 'Ja, naar winkelwagen',
-            cancelButtonText: 'Verder winkelen'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "/winkelwagen/";
-            }
-        });
-    </script>
-    {% endif %}
+<nav class="second_header">
+    <h1>Producten</h1>
+    <a href="{% url 'view_cart' %}">
+        <button>Winkelmandje</button>
+    </a>
+</nav>
+{% if product_toegevoegd %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div class="content_pro" >
+<script>
+    Swal.fire({
+        title: 'Toegevoegd aan winkelwagen!',
+        text: "Wil je doorgaan naar de winkelwagen?",
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonText: 'Ja, naar winkelwagen',
+        cancelButtonText: 'Verder winkelen'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "/winkelwagen/";
+        }
+    });
+</script>
+{% endif %}
 
-        {% for product in products %}
-        <a class="product " href="{% url 'product_detail' product.id %}">
-            <h2>{{ product.name }}</h2>
-            <p>Prijs: €{{ product.price }}</p>
-            {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-            {% endif %}
-            <p>{{ product.description }}</p>
-            <form method="post" action="{% url 'add_to_cart' product.id %}">
-                {% csrf_token %}
-                <button class="add  " type="submit" >+</button>
-            </form>
-        </a>
-        {% empty %}
-        <p>Geen producten gevonden.</p>
-        {% endfor %}
-    </div>
+<div class="products_list">
+
+    {% for product in products %}
+    <a class="product " href="{% url 'product_detail' product.id %}">
+        <h2>{{ product.name }}</h2>
+        <p>Prijs: €{{ product.price }}</p>
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <p>{{ product.description }}</p>
+        <form method="post" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button class="add  " type="submit">+</button>
+        </form>
+    </a>
+    {% empty %}
+    <p>Geen producten gevonden.</p>
+    {% endfor %}
 </div>
-{% endblock %}
+
+{% endblock article %}
