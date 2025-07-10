@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Banners {% endblock %}
+
+{% block article %}
+
+<nav class="second_header">
+    <h1>Our Banners</h1>
+    <a href="{% url 'home'  %}">← Terug naar home</a>
+
+</nav>
+
+<h1>{{ banner }}</h1>
+<div class="products_list">
+
+    {% for product in products %}
+    <a class="product " href="{% url 'product_detail' product.id %}">
+        <h2 class="product_name ">{{ product.name }}</h2>
+        <p class="product_price ">Prijs: €{{ product.price }}</p>
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product_image ">
+        {% endif %}
+        <p class="product_description ">{{ product.description }}</p>
+        <form method="post" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button class="add  " type="submit">+</button>
+        </form>
+    </a>
+    {% empty %}
+    <p>Geen producten gevonden.</p>
+    {% endfor %}
+</div>
+
+
+
+{% endblock article %}

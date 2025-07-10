@@ -109,6 +109,7 @@ body {
             padding: 20px 20px 80px 20px;
             background-color: #ffffff;
 
+
             .second_header {
                 display: flex;
                 justify-content: space-between;
@@ -137,24 +138,60 @@ body {
 
             .hero_container {
                 display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 80px;
-                height: 300px;
+                align-content: center;
+                padding: 6px;
+                width: 100%;
+                height: 410px;
+                overflow: hidden;
+                position: relative;
 
-                background: rgb(255, 255, 255);
-                box-shadow: 9px 9px 20px -30px rgb(5, 1, 1);
 
-                .hero {
+                .banners-track {
                     display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
+                    transition: 1s translateX;
+                    animation: scroll 55s linear infinite;
+                    width: max-content;
 
+                    .banners {
+                        display: flex;
+
+                        .banner {
+                            flex: 0 0 auto;
+                            width: 500px;
+                            margin-right: 16px;
+                            border-radius: 8px;
+                            overflow: hidden;
+                            background: white;
+                            border: 1px solid #ddd;
+                            transition: 0.08s;
+
+                            a {
+
+                                img {
+                                    width: 100%;
+                                    height: 70%;
+                                }
+
+                                .banner-text {
+                                    padding: 10px;
+                                }
+
+                            }
+                            &:hover {
+                                scale: 1.06;
+                                box-shadow: 0 0 10px #eceef3;
+                                border-radius: 7px;
+                                padding: 5px;
+                            }
+                        }
+                    }
                 }
 
+                &:hover .banners-track {
+                    animation-play-state: paused;
+                }
             }
+
 
             .items_container {
                 display: flex;
@@ -204,7 +241,7 @@ body {
                         height: 400px;
                         border-radius: 10px;
                         background-color: rgb(255, 255, 255);
-                        box-shadow:  0 0 20px rgba(145, 138, 113, 0.47);
+                        box-shadow: 0 0 20px rgba(145, 138, 113, 0.47);
                         transition: 0.6s;
 
                         .new_item {
@@ -241,7 +278,8 @@ body {
 
 
                         }
-                        &:hover{
+
+                        &:hover {
                             scale: 1.06;
                             transform: translateY(-6px);
                             box-shadow: 0 20px 20px rgba(145, 138, 113, 0.47);
@@ -270,6 +308,7 @@ body {
 
                                 .order_item {
                                     padding: 10px;
+
                                     img {
                                         width: 80px;
                                         height: 80px;
@@ -325,6 +364,7 @@ body {
                 width: 300px;
                 height: 400px;
                 background: #efece8;
+
                 .product_image {
                     display: flex;
                     align-items: center;
@@ -514,6 +554,7 @@ body {
                     .helptext {
                         display: block;
                     }
+
                     button {
                         background-color: #76aaca;
                         padding: 6px;
@@ -541,5 +582,15 @@ body {
         align-items: center;
         width: 100%;
         background-color: #f8f5ec;
+    }
+}
+
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
     }
 }

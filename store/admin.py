@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Order, OrderItem
+from .models import Product, Category, Order, OrderItem, Banner
 from django.utils.html import format_html
 
 # Register your models here.
@@ -7,12 +7,12 @@ from django.utils.html import format_html
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'image')
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price','category', 'created_at', 'image_tag','new')
+    list_display = ('name', 'price','category', 'created_at', 'image_tag', 'new')
 
     def image_tag(self, obj):
         if obj.image:
@@ -39,3 +39,6 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
 
 
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'description', 'image', 'link']

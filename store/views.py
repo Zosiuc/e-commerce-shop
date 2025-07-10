@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Order, OrderItem, Category  # pas aan op basis van je model
+from .models import Product, Order, OrderItem, Category, Banner  # pas aan op basis van je model
 from django.views.decorators.http import require_POST, require_GET
 import stripe
 from django.conf import settings
@@ -85,9 +85,10 @@ def home_view(request):
     categories = Category.objects.all()
     products = Product.objects.all()
     recent_orders = []
+    banners = Banner.objects.all()
     if request.user.is_authenticated:
         recent_orders = Order.objects.filter(user=request.user, paid=True).order_by('-created_at')[:5]
-    return render(request, 'store/home.html', {'products': products, 'categories': categories, 'recent_orders': recent_orders})
+    return render(request, 'store/home.html', {'products': products, 'categories': categories, 'recent_orders': recent_orders, 'banners': banners})
 
 
 def product_list(request, filterterm):
@@ -224,3 +225,20 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+def contact_view(request):
+    return render(request, 'store/contact.html')
+
+
+def banners(request, banner):
+    if banner == 'new':
+        products = Product.objects.filter(new=True)
+    else:
+        products = Product.objects.filter(
+            Q(name__icontains=banner) |
+            Q(description__icontains=banner) |
+            Q(category__name__icontains=banner)|
+            Q()
+        )
+    return render(request, 'store/banners.html', {'banner': banner, 'products':products})
