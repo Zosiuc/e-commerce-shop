@@ -30,16 +30,24 @@
         <ul class="flex flex-col gap-[8px]">
             <div class="flex flex-col gap-[4px]">
                 <strong>Profile</strong>
-                <ul class="links_group m-[4px]">
+                <ul class="links_group m-[4px] ">
                     {% if user.is_authenticated %}
                     <p>Welkom, {{ user.username }}!</p>
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="aside_link">Uitloggen</button>
-                    </form>
+                    <ul>
+                        <a class="aside_link" href="{% url 'password_change' %}">Wachtwoord wijzigen</a>
+                        <a class="aside_link" href="{% url 'password_reset' %}">Wachtwoord resetten</a>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="aside_link">Uitloggen</button>
+                        </form>
+                    </ul>
+
                     {% else %}
-                    <li class="aside_link"><a href="{% url 'login' %}"> Login </a></li>
-                    <li class="aside_link"><a href="{% url 'register' %}">Sing up</a></li>
+                    <ul>
+                        <li class="aside_link"><a href="{% url 'login' %}"> Login </a></li>
+                        <li class="aside_link"><a href="{% url 'register' %}">Sing up</a></li>
+                    </ul>
+
                     {% endif %}
                 </ul>
             </div>

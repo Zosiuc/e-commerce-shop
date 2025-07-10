@@ -12,35 +12,18 @@
         <button>Winkelmandje</button>
     </a>
 </nav>
-{% if product_toegevoegd %}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script>
-    Swal.fire({
-        title: 'Toegevoegd aan winkelwagen!',
-        text: "Wil je doorgaan naar de winkelwagen?",
-        icon: 'success',
-        showCancelButton: true,
-        confirmButtonText: 'Ja, naar winkelwagen',
-        cancelButtonText: 'Verder winkelen'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "/winkelwagen/";
-        }
-    });
-</script>
-{% endif %}
 
 <div class="products_list">
 
     {% for product in products %}
     <a class="product " href="{% url 'product_detail' product.id %}">
-        <h2>{{ product.name }}</h2>
-        <p>Prijs: €{{ product.price }}</p>
+        <h2 class="product_name ">{{ product.name }}</h2>
+        <p class="product_price ">Prijs: €{{ product.price }}</p>
         {% if product.image %}
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product_image ">
         {% endif %}
-        <p>{{ product.description }}</p>
+        <p class="product_description ">{{ product.description }}</p>
         <form method="post" action="{% url 'add_to_cart' product.id %}">
             {% csrf_token %}
             <button class="add  " type="submit">+</button>

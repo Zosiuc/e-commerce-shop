@@ -18,11 +18,17 @@
         <a rel="shop" href="{% url 'product_list' 'all' %}">see all </a>
     </nav>
 
-    <div class="items">
+    <div class="items ">
         {% for category in categories %}
+        {% if category.image %}
         <a rel="categories" href="{% url 'product_list' category.name %}">
-        <div class="item">{{category.name}}</div>
+            <img src="{{ category.image.url }}" alt="{{category.name}}" class="item">
         </a>
+        {% else %}
+        <a rel="categories" href="{% url 'product_list' category.name %}">
+            <div class="item"> {{category.name}}</div>
+        </a>
+        {% endif %}
         {% endfor %}
     </div>
 </section>
@@ -36,12 +42,13 @@
         {% for product in products %}
         {% if product.new %}
         <div class="item">
-        <a  href="{% url 'product_detail' product.id %}">
-            <img src="{{ product.image.url }}" alt="{{product.name}}" class="w-[220px] ">
-            <br>
-            <strong>{{product}}</strong>
-            <i>€{{product.price}}</i>
-        </a>
+            <a href="{% url 'product_detail' product.id %}" class="new_item">
+                <div class="product_image">
+                    <img src="{{ product.image.url }}" alt="{{product.name}}">
+                </div>
+                <strong class="product_name">{{product}}</strong>
+                <i class="product_price">€{{product.price}}</i>
+            </a>
         </div>
         {% endif %}
         {% endfor %}
@@ -56,15 +63,21 @@
     </nav>
     {% if recent_orders %}
     <div class="items">
-        <ul class="items">
+        <ul class="orders">
             {% for order in recent_orders %}
-            <li class="item">
+            <li class="order">
                 <strong>Bestelling {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
-                <ul class="">
+                <ul class="order_items">
                     {% for item in order.items.all %}
-                    <li>{{ item.quantity }}× {{ item.product.name }} (€{{ item.price }})</li>
+                    <li class="order_item">
+                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        <p>{{item.quantity}} × {{item.product}}</p>
+                        <i>(€{{ item.price }})</i>
+                    </li>
                     {% endfor %}
                 </ul>
+
+
             </li>
             {% endfor %}
         </ul>

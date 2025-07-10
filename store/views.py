@@ -132,6 +132,7 @@ def remove_from_cart(request, product_id):
 
 
 def view_cart(request):
+    # request.session['cart'] = {}
     cart = request.session.get('cart', {})
     cart_items = []
     total_price = 0
