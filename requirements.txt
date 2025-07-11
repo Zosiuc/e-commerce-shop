@@ -10,7 +10,7 @@ sqlparse==0.5.3
 typing_extensions==4.12.2
 requests==2.32.4
 stripe==12.3.0
-google-ai-generativelanguage==0.6.10
+google-ai-generativelanguage==4.21.5
 google-auth==2.35.0
 google-api-python-client==2.149.0
 google-cloud-storage==2.18.2
