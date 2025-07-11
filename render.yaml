@@ -3,7 +3,8 @@ services:
     name: django-app
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn shop.wsgi:application
+    startCommand: gunicorn shop.wsgi:application --bind 0.0.0.0:$PORT
+
     envVars:
       - key: DEBUG
         value: "False"
