@@ -11,7 +11,6 @@ SECRET_KEY = config("DJANGO_SECRET_KEY")
 DEBUG = config("DEBUG", "True") == "True"
 
 
-
 # Applicaties
 INSTALLED_APPS = [
     "django.contrib.admin",

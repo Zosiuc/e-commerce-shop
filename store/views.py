@@ -231,6 +231,10 @@ def contact_view(request):
     return render(request, 'store/contact.html')
 
 
+def complaint_view(request):
+    return render(request, 'store/complaint.html')
+
+
 def banners(request, banner):
     if banner == 'new':
         products = Product.objects.filter(new=True)

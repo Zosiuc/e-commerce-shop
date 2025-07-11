@@ -14,6 +14,7 @@ urlpatterns = [
     path('cancel/', views.cancel, name='cancel'),
     path('my-orders/', views.my_orders, name='my_orders'),
     path('contact/', views.contact_view, name='contact'),
+    path('/complaint/', views.complaint_view, name='complaint'),
     path('banners/<str:banner>', views.banners, name='banners'),
 
     path('api/zoeken/', views.zoek_producten, name='zoek_producten'),

@@ -73,3 +73,48 @@ async function zoek() {
     });
 
 }
+
+// Banners Scrollen Animation
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector(".banners-track");
+    if (!track) return;
+
+    const originalContent = track.innerHTML;
+    track.innerHTML += originalContent;
+
+    let scrollSpeed = 1;
+    let isPaused = false;
+    let userInteracting = false;
+    let interactionTimeout;
+
+    const pauseAutoScroll = () => {
+        userInteracting = true;
+        clearTimeout(interactionTimeout);
+        interactionTimeout = setTimeout(() => {
+            userInteracting = false;
+        }, 0); // 2 seconden pauze na interactie
+    };
+
+    // Mouse/touch input detecteren
+    track.addEventListener("mouseenter", () => (isPaused = true));
+    track.addEventListener("mouseleave", () => (isPaused = false));
+    track.addEventListener("wheel", pauseAutoScroll, { passive: true });
+    track.addEventListener("touchstart", pauseAutoScroll, { passive: true });
+    track.addEventListener("scroll", pauseAutoScroll);
+
+    function autoScroll() {
+        if (!isPaused && !userInteracting) {
+            track.scrollLeft += scrollSpeed;
+
+            if (track.scrollLeft >= track.scrollWidth / 2) {
+                track.scrollLeft = 0;
+            }
+        }
+
+        requestAnimationFrame(autoScroll);
+    }
+
+    autoScroll();
+});
+
+

@@ -6,32 +6,21 @@
 {% block article %}
 
 <section class="hero_container">
+
     <div class="banners-track">
-        <div class="banners">
-            {% for banner in banners %}
-            <div class="banner">
-                <a href="{{ banner.link }}">
-                    <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
-                    <div class="banner-text">
-                        <h2>{{ banner.title }}</h2>
-                        <p>{{ banner.description }}</p>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
-            {% for banner in banners %}
-            <div class="banner">
-                <a href="{{ banner.link }}">
-                    <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
-                    <div class="banner-text">
-                        <h2>{{ banner.title }}</h2>
-                        <p>{{ banner.description }}</p>
-                    </div>
-                </a>
-            </div>
-            {% endfor %}
+        {% for banner in banners %}
+        <div class="banner">
+            <a href="{{ banner.link }}">
+                <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
+                <div class="banner-text">
+                    <h2>{{ banner.title }}</h2>
+                    <p>{{ banner.description }}</p>
+                </div>
+            </a>
         </div>
+        {% endfor %}
     </div>
+
 </section>
 
 <section class="items_container">
