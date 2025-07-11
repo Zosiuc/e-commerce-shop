@@ -2,14 +2,14 @@ import os
 from pathlib import Path
 
 import dj_database_url
-
-
+from dotenv import load_dotenv
 
 # Basis directory
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, '.env'))
 
 # Beveiliging
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "DJANGO_SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", "True")
 ALLOWED_HOSTS = [os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
 
@@ -59,8 +59,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "shop.wsgi.application"
 
-# Database (standaard SQLite)
+# Database
 DATABASES = {
+
     'default': dj_database_url.config(conn_max_age=600)
 }
 

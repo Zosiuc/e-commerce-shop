@@ -3,19 +3,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'shop/css/global.css' %}">
     <title>{% block title %} Shop {% endblock %}</title>
-    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'shop/js/script.js' %}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
 <header>
     <button type="button" onclick="toggleSide_bar()">
-        <img src="{%  static 'images/app.png' %}" alt="aside icon" class="w-[40px]  hover:scale-[1.06] duration-700"/>
+        <img src="{%  static 'shop/images/app.png' %}" alt="aside icon" class="w-[40px]  hover:scale-[1.06] duration-700"/>
     </button>
     <strong>
-        <a href="/"><img src="{% static 'images/Icon.svg' %}" alt="zosiuc icon" class="w-[40px]"></a>
+        <a href="/"><img src="{% static 'shop/images/Icon.svg' %}" alt="zosiuc icon" class="w-[40px]"></a>
         <label class="search">
             <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
             <ul id="resultaten" class="hidden"></ul>
