@@ -2,16 +2,16 @@ import os
 from pathlib import Path
 
 import dj_database_url
-from decouple import config
+
 
 
 # Basis directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Beveiliging
-SECRET_KEY = config("DJANGO_SECRET_KEY")
-DEBUG = config("DEBUG", "True")
-ALLOWED_HOSTS = config("ALLOWED_HOSTS")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+DEBUG = os.environ.get("DEBUG", "True")
+ALLOWED_HOSTS = [os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
 
 
 # Applicaties
@@ -98,8 +98,8 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Stripe integratie
-STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
-STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 
 # Redirect
 LOGIN_URL = '/login/'
@@ -108,4 +108,4 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 
-EMAIL_BACKEND = config("EMAIL_BACKEND")
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
