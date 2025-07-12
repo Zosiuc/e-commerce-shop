@@ -3,8 +3,24 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="title" content="Zosiuc OnLine"/>
+    <meta name="description"
+          content=" e-commerce shop"/>
+
+
+    <link rel="icon" href="/favicon.png" type="image/png"/>
+    <link rel="alternate icon" href="/icon.png" type="image/png"/>
+
+    <link rel="favicon" href="/favicon.png" type="image/png+xml"/>
+    <link rel="alternate favicon" href="/favicon.svg" type="image/svg+xml"/>
+    <meta property="og:icon" content="/icon.png"/>
+
+
+
     <link rel="stylesheet" href="{% static 'shop/css/global.css' %}">
+
     <title>{% block title %} Shop {% endblock %}</title>
+
     <script src="{% static 'shop/js/script.js' %}"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -12,15 +28,15 @@
 
 <header>
     <button type="button" onclick="toggleSide_bar()">
-        <img src="{%  static 'shop/images/app.png' %}" alt="aside icon" class="w-[40px]  hover:scale-[1.06] duration-700"/>
+        <img src="{%  static 'shop/images/app.png' %}" alt="aside icon" class="menu"/>
     </button>
-    <strong>
-        <a href="/"><img src="{% static 'shop/images/Icon.svg' %}" alt="zosiuc icon" class="w-[40px]"></a>
+    <div class="icon_search">
+
         <label class="search">
             <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
             <ul id="resultaten" class="hidden"></ul>
         </label>
-    </strong>
+    </div>
 
 </header>
 
@@ -29,6 +45,7 @@
     <aside class="side_bar" id="side_bar">
         <ul class="flex flex-col gap-[8px]">
             <div class="flex flex-col gap-[4px]">
+                <strong> <a class="aside_link" href="{% url 'home' %}">Home</a></strong>
                 <strong>Profile</strong>
                 <ul class="links_group m-[4px] ">
                     {% if user.is_authenticated %}
@@ -70,7 +87,9 @@
 
 
 <footer>
-    &copy; 2025 Zosiuc Software
+    <div>Powered by <a href="https://zosiuc.dev"><img src="{% static 'shop/images/faceLogo.svg' %}" alt="zosiuc icon" ></a></div>
+    <div><i>&copy; 2025 Zosiuc Software</i></div>
+
 </footer>
 </body>
 </html>

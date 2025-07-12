@@ -9,41 +9,49 @@
     <h1>Contact Us</h1>
     <a href="{% url 'home'  %}">← Terug naar home</a>
 </nav>
-<section class="contact contact_item" >
-    <h2>Contactmogelijkheden</h2>
-    <div class="contactopties">
-        <a href="mailto:info@jouwsite.nl">✉️ E-mail: info@jouwsite.nl</a>
-        <a href="tel:+310612345678">📞 Telefoon: 06 12345678</a>
-        <a href="https://wa.me/31612345678">💬 WhatsApp</a>
-        <p>🗨️ Livechat: beschikbaar rechtsonder op de site</p>
-        <p><strong>Reactie binnen 24 uur</strong> (vaak sneller)</p>
-    </div>
-</section>
+<div class="my_container">
+    <section class="contact contact_item">
+        <h2>Contactmogelijkheden</h2>
+        <div class="contactopties">
+            <a href="mailto:info@jouwsite.nl">✉️ E-mail: info@jouwsite.nl</a>
+            <a href="tel:+310612345678">📞 Telefoon: 06 12345678</a>
+            <a href="https://wa.me/31612345678">💬 WhatsApp</a>
+            <p>🗨️ Livechat: beschikbaar rechtsonder op de site</p>
+            <p><strong>Reactie binnen 24 uur</strong> (vaak sneller)</p>
+        </div>
+    </section>
 
-<section class="faq contact_item">
-    <h2>Veelgestelde Vragen (FAQ)</h2>
-    <ul class="content">
-        <li><strong>Hoe kan ik mijn bestelling volgen?</strong><br>Je ontvangt een Track & Trace link per e-mail na verzending.</li>
-        <li><strong>Hoe retourneer ik een product?</strong><br>Je hebt 30 dagen om te retourneren. Zie de retourpagina voor instructies.</li>
-        <li><strong>Welke betaalmethoden bieden jullie aan?</strong><br>iDEAL, creditcard, PayPal en meer.</li>
-    </ul>
-</section>
+    <section class="faq contact_item">
+        <h2>Veelgestelde Vragen (FAQ)</h2>
+        <ul class="content">
+            <li><strong>Hoe kan ik mijn bestelling volgen?</strong><br>Je ontvangt een Track & Trace link per e-mail na
+                verzending.
+            </li>
+            <li><strong>Hoe retourneer ik een product?</strong><br>Je hebt 30 dagen om te retourneren. Zie de
+                retourpagina voor instructies.
+            </li>
+            <li><strong>Welke betaalmethoden bieden jullie aan?</strong><br>iDEAL, creditcard, PayPal en meer.</li>
+        </ul>
+    </section>
 
-<section class="volg_bestelling contact_item" >
-    <h2>Volg je bestelling</h2>
-    <div class="content">
-    <p>Na je bestelling ontvang je een bevestiging per e-mail en een Track & Trace code zodra het pakket verzonden is.</p>
-    </div>
-</section>
+    <section class="volg_bestelling contact_item">
+        <h2>Volg je bestelling</h2>
+        <div class="content">
+            <p>Na je bestelling ontvang je een bevestiging per e-mail en een Track & Trace code zodra het pakket
+                verzonden is.</p>
+        </div>
+    </section>
 
-<section class="klachtenprocedure contact_item" >
-    <h2>Klachtenprocedure</h2>
-    <div class="content">
-        <p>Heb je een klacht? Stuur ons een bericht via e-mail of WhatsApp. We reageren snel, professioneel en klantgericht.</p>
-        <p>Volg onze klachtenprocedure op de <a href="{% url 'complaint' %}">klachtenpagina</a>.</p>
-    </div>
+    <section class="klachtenprocedure contact_item">
+        <h2>Klachtenprocedure</h2>
+        <div class="content">
+            <p>Heb je een klacht? Stuur ons een bericht via e-mail of WhatsApp. We reageren snel, professioneel en
+                klantgericht.</p>
+            <p>Volg onze klachtenprocedure op de <a href="{% url 'complaint' %}">klachtenpagina</a>.</p>
+        </div>
 
-</section>
+    </section>
+</div>
 
 
 {% endblock article %}

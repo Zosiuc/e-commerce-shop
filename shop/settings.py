@@ -61,8 +61,8 @@ WSGI_APPLICATION = "shop.wsgi.application"
 
 # Database
 DATABASES = {
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 
-    'default': dj_database_url.config(conn_max_age=600)
 }
 
 # Wachtwoord validatie

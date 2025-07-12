@@ -4,98 +4,99 @@
 {% block title %}Home{% endblock %}
 
 {% block article %}
+<div class="my_container">
+    <section class="hero_container">
 
-<section class="hero_container">
-
-    <div class="banners-track">
-        {% for banner in banners %}
-        <div class="banner">
-            <a href="{{ banner.link }}">
-                <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
-                <div class="banner-text">
-                    <h2>{{ banner.title }}</h2>
-                    <p>{{ banner.description }}</p>
-                </div>
-            </a>
-        </div>
-        {% endfor %}
-    </div>
-
-</section>
-
-<section class="items_container">
-    <nav class="section_title">
-        <h2>Assortment</h2>
-        <a rel="shop" href="{% url 'product_list' 'all' %}">see all </a>
-    </nav>
-
-    <div class="items ">
-        {% for category in categories %}
-        {% if category.image %}
-        <a rel="categories" href="{% url 'product_list' category.name %}">
-            <img src="{{ category.image.url }}" alt="{{category.name}}" class="item">
-        </a>
-        {% else %}
-        <a rel="categories" href="{% url 'product_list' category.name %}">
-            <div class="item"> {{category.name}}</div>
-        </a>
-        {% endif %}
-        {% endfor %}
-    </div>
-</section>
-<section class="items_container">
-    <nav class="section_title">
-        <h2>New added</h2>
-        <a rel="new" href="{% url 'product_list' 'new' %}">see all </a>
-    </nav>
-
-    <div class="items">
-        {% for product in products %}
-        {% if product.new %}
-        <div class="item">
-            <a href="{% url 'product_detail' product.id %}" class="new_item">
-                <div class="product_image">
-                    <img src="{{ product.image.url }}" alt="{{product.name}}">
-                </div>
-                <strong class="product_name">{{product}}</strong>
-                <i class="product_price">€{{product.price}}</i>
-            </a>
-        </div>
-        {% endif %}
-        {% endfor %}
-    </div>
-</section>
-<section class="items_container">
-
-    <nav class="section_title">
-        <h2> recent orders</h2>
-        <a href="{% url 'my_orders' %}">Bekijk alle
-            bestellingen →</a>
-    </nav>
-    {% if recent_orders %}
-    <div class="items">
-        <ul class="orders">
-            {% for order in recent_orders %}
-            <li class="order">
-                <strong>Bestelling {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
-                <ul class="order_items">
-                    {% for item in order.items.all %}
-                    <li class="order_item">
-                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                        <p>{{item.quantity}} × {{item.product}}</p>
-                        <i>(€{{ item.price }})</i>
-                    </li>
-                    {% endfor %}
-                </ul>
-
-
-            </li>
+        <div class="banners-track">
+            {% for banner in banners %}
+            <div class="banner">
+                <a href="{{ banner.link }}">
+                    <img src="{{ banner.image.url }}" alt="{{ banner.image.url }}">
+                    <div class="banner-text">
+                        <h2>{{ banner.title }}</h2>
+                        <p>{{ banner.description }}</p>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
 
-    </div>
-    {% endif %}
-</section>
+    </section>
+
+    <section class="items_container">
+        <nav class="section_title">
+            <h2>Assortment</h2>
+            <a rel="shop" href="{% url 'product_list' 'all' %}">see all </a>
+        </nav>
+
+        <div class="items ">
+            {% for category in categories %}
+            {% if category.image %}
+            <a rel="categories" href="{% url 'product_list' category.name %}">
+                <img src="{{ category.image.url }}" alt="{{category.name}}" class="item">
+            </a>
+            {% else %}
+            <a rel="categories" href="{% url 'product_list' category.name %}">
+                <div class="item"> {{category.name}}</div>
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section class="items_container">
+        <nav class="section_title">
+            <h2>New added</h2>
+            <a rel="new" href="{% url 'product_list' 'new' %}">see all </a>
+        </nav>
+
+        <div class="items">
+            {% for product in products %}
+            {% if product.new %}
+            <div class="item">
+                <a href="{% url 'product_detail' product.id %}" class="new_item">
+                    <div class="product_image">
+                        <img src="{{ product.image.url }}" alt="{{product.name}}">
+                    </div>
+                    <strong class="product_name">{{product}}</strong>
+                    <i class="product_price">€{{product.price}}</i>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section class="items_container">
+
+        <nav class="section_title">
+            <h2> recent orders</h2>
+            <a href="{% url 'my_orders' %}">Bekijk alle
+                bestellingen →</a>
+        </nav>
+        {% if recent_orders %}
+        <div class="items">
+            <ul class="orders">
+                {% for order in recent_orders %}
+                <li class="order">
+                    <strong>Bestelling {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
+                    <ul class="order_items">
+                        {% for item in order.items.all %}
+                        <li class="order_item">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            <p>{{item.quantity}} × {{item.product}}</p>
+                            <i>(€{{ item.price }})</i>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        {% endif %}
+    </section>
+</div>
 
 
 {% endblock article %}

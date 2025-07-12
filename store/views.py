@@ -122,7 +122,7 @@ def add_to_cart(request, product_id):
 
     request.session['cart'] = cart
 
-    return redirect('product_list', 'all')
+    return redirect('view_cart')
 
 
 def remove_from_cart(request, product_id):

@@ -7,12 +7,12 @@
 
 <nav class="second_header">
     <h1>Our Banners</h1>
+    <h1>{{ banner }}</h1>
     <a href="{% url 'home'  %}">← Terug naar home</a>
-
 </nav>
 
-<h1>{{ banner }}</h1>
-<div class="products_list">
+
+<div class="products_list my_container">
 
     {% for product in products %}
     <a class="product " href="{% url 'product_detail' product.id %}">
