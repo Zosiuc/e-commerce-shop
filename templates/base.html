@@ -43,39 +43,42 @@
 
 <main >
     <aside class="side_bar" id="side_bar">
-        <ul class="flex flex-col gap-[8px]">
-            <div class="flex flex-col gap-[4px]">
-                <strong> <a class="aside_link" href="{% url 'home' %}">Home</a></strong>
-                <strong>Profile</strong>
-                <ul class="links_group m-[4px] ">
-                    {% if user.is_authenticated %}
-                    <p>Welkom, {{ user.username }}!</p>
-                    <ul>
-                        <a class="aside_link" href="{% url 'password_change' %}">Wachtwoord wijzigen</a>
-                        <a class="aside_link" href="{% url 'password_reset' %}">Wachtwoord resetten</a>
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="aside_link">Uitloggen</button>
-                        </form>
-                    </ul>
 
-                    {% else %}
-                    <ul>
-                        <li class="aside_link"><a href="{% url 'login' %}"> Login </a></li>
-                        <li class="aside_link"><a href="{% url 'register' %}">Sing up</a></li>
-                    </ul>
+        <div>
+            <strong> <a class="aside_link" href="{% url 'home' %}">Home</a></strong>
+        </div>
+        <span></span>
+        <div class="profile" >
+            <strong>Profile</strong>
 
-                    {% endif %}
-                </ul>
-            </div>
-            <span>______________</span>
-            <div class="flex flex-col gap-[4px]">
-                <strong>Contact</strong>
-                <ul class="links_group m-[4px]">
-                    <li class="aside_link"><a href="/contact/">Klant Service</a></li>
-                </ul>
-            </div>
-        </ul>
+            {% if user.is_authenticated %}
+            <p>Welkom, {{ user.username }}!</p>
+            <ul class="profile_links">
+                <a class="aside_link" href="{% url 'password_change' %}">Wachtwoord wijzigen</a>
+                <a class="aside_link" href="{% url 'password_reset' %}">Wachtwoord resetten</a>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="aside_link">Uitloggen</button>
+                </form>
+            </ul>
+
+            {% else %}
+            <ul class="profile_links">
+                <li class="aside_link"><a href="{% url 'login' %}"> Login </a></li>
+                <li class="aside_link"><a href="{% url 'register' %}">Sing up</a></li>
+            </ul>
+
+            {% endif %}
+
+        </div>
+        <span></span>
+        <div class="contact">
+            <strong>Contact</strong>
+            <ul class="contact_links">
+                <li class="aside_link"><a href="/contact/">Klant Service</a></li>
+            </ul>
+        </div>
+
     </aside>
     <article>
     {% block article %}
@@ -87,7 +90,10 @@
 
 
 <footer>
-    <div>Powered by <a href="https://zosiuc.dev"><img src="{% static 'shop/images/faceLogo.svg' %}" alt="zosiuc icon" ></a></div>
+    <div class="powered_by">
+        <strong><i>Powered by</i></strong>
+        <a href="https://zosiuc.dev"><img src="{% static 'shop/images/faceLogo.svg' %}" alt="zosiuc icon" ></a>
+    </div>
     <div><i>&copy; 2025 Zosiuc Software</i></div>
 
 </footer>
