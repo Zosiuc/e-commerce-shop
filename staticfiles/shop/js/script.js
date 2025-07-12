@@ -52,7 +52,7 @@ async function zoek() {
                 const a = document.createElement("a");
                 const li = document.createElement("li");
                 li.textContent = `${product.name} – €${product.price}`;
-                a.href = `/new_products/${product.id}`;
+                a.href = `/product_details/${product.id}`;
                 li.classList.add("list_item");
                 a.appendChild(li);
                 resultaten.appendChild(a);
