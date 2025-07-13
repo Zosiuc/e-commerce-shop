@@ -11,7 +11,7 @@ load_dotenv(os.path.join(Path(__file__).resolve().parent.parent, '.env'))
 # Beveiliging
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "DJANGO_SECRET_KEY")
 DEBUG = os.environ.get("DEBUG", "True")
-ALLOWED_HOSTS = [os.environ.get("RENDER_EXTERNAL_HOSTNAME", "localhost")]
+ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
 
 
 # Applicaties
