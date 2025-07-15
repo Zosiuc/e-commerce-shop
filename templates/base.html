@@ -15,30 +15,42 @@
     <link rel="alternate favicon" href="{% static 'shop/images/favicon.svg' %}" type="image/svg+xml"/>
     <meta property="og:icon" content="{% static 'shop/images/favicon.png' %}"/>
 
-
-
     <link rel="stylesheet" href="{% static 'shop/css/global.css' %}">
 
     <title>{% block title %} Shop {% endblock %}</title>
 
     <script src="{% static 'shop/js/script.js' %}"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
 
 <header>
-    <button type="button" onclick="toggleSide_bar()">
-        <img src="{%  static 'shop/images/app.png' %}" alt="aside icon" class="menu"/>
-    </button>
-    <div class="icon_search">
-
-        <label class="search">
-            <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
-            <ul id="resultaten" class="hidden"></ul>
-        </label>
+    {% block header %}
+    <div class="main_header">
+        <nav class="header_nav">
+            <button type="button" onclick="toggleSide_bar()" class="menu_button">
+                <img src="{%  static 'shop/images/menu.png' %}" alt="aside icon" class="menu_icon"/>
+            </button>
+            <div class="search_container">
+                <button class="search_button" id="search_button" onclick="toggleSearch_bar()">
+                    <img src="{%  static 'shop/images/search.png' %}" alt="search icon" class="search_icon" id="search_icon"/>
+                    <label class="search_bar" id="search_bar">
+                        <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
+                    </label>
+                </button>
+            </div>
+            <a rel="home" href="{% url 'home' %}" class="main_icon">
+            <img src="{% static 'shop/images/icon.png' %}" alt="main icon"></a>
+        </nav>
+        {% if user.is_authenticated %}
+        <p class="greet_p" id="greet_p">Welkom, {{ user.username }}!</p>
+        {% endif %}
+        <ul id="resultaten" class="hidden"></ul>
     </div>
 
+    {% endblock %}
 </header>
+
 
 
 <main >
@@ -52,7 +64,6 @@
             <strong>Profile</strong>
 
             {% if user.is_authenticated %}
-            <p>Welkom, {{ user.username }}!</p>
             <ul class="profile_links">
                 <a class="aside_link" href="{% url 'password_change' %}">Wachtwoord wijzigen</a>
                 <a class="aside_link" href="{% url 'password_reset' %}">Wachtwoord resetten</a>
