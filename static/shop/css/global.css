@@ -95,6 +95,7 @@ body {
             font-weight: bolder;
             font-family: "Academy Engraved LET", serif;
             color: rgb(255, 255, 255);
+            position: unset;
 
         }
         .store_list {

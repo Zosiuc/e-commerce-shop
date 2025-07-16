@@ -43,9 +43,14 @@
             <a rel="home" href="{% url 'home' %}" class="main_icon">
             <img src="{% static 'shop/images/icon.png' %}" alt="main icon"></a>
         </nav>
-        {% if user.is_authenticated %}
-        <p class="greet_p" id="greet_p">Welkom, {{ user.username }}!</p>
-        {% endif %}
+
+        <p class="greet_p" id="greet_p">
+            {% if user.is_authenticated %}
+            Welkom, {{ user.username }}!
+            {% else %}
+            Welkom to Zosiuc Online!
+            {% endif %}
+        </p>
         <ul id="resultaten" class="hidden"></ul>
     </div>
 
