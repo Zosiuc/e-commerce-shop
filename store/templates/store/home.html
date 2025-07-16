@@ -6,7 +6,7 @@
 
 
 {% block article %}
-<div class="my_container">
+<div >
     <!--<section class="hero-container">
         <p> ^,^ </p>
     </section>-->
@@ -85,7 +85,7 @@
                     <ul class="order_items">
                         {% for item in order.items.all %}
                         <li class="order_item">
-                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="item_image">
                             <p>{{item.quantity}} × {{item.product}}</p>
                             <i>(€{{ item.price }})</i>
                         </li>

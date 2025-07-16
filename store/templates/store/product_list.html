@@ -22,10 +22,11 @@
             <h2 class="product_name ">{{ product.name }}</h2>
             <p class="product_price ">Prijs: €{{ product.price }}</p>
         </div>
-
+        <div class="product_image">
         {% if product.image %}
-        <img src="{{product.image.url}}" alt="{{ product.name }}" class="product_image">
+        <img src="{{product.image.url}}" alt="{{ product.name }}" >
         {% endif %}
+        </div>
         <p class="product_description ">{{ product.description }}</p>
         <form method="post" action="{% url 'add_to_cart' product.id %}">
             {% csrf_token %}

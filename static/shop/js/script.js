@@ -14,14 +14,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Show sidebar
 function toggleSide_bar() {
-
+    const main_header = document.getElementById('main_header');
     const side_bar = document.getElementById('side_bar');
     console.log(side_bar.style.display);
 
     if (side_bar.style.display === 'flex') {
         side_bar.style.display = 'none';
+        main_header.style.background = '#9A7F58BC';
+
     } else {
         side_bar.style.display = 'flex';
+        main_header.style.background = '#433C33FF';
+
     }
     console.log(side_bar.style.display);
 }

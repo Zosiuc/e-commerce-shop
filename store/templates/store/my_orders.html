@@ -10,19 +10,30 @@
     <a href="{% url 'home' %}">← Terug naar Home</a>
 </nav>
 
-<section class="cart_list my_container">
+<section class="my_orders my_container">
     {% if orders %}
-    <ul class="space-y-2 text-sm text-gray-800">
+    <ul class="orders">
         {% for order in orders %}
-        <li class="flex flex-col border-b p-4 gap-4 ">
+        <li class="order">
             {{ order.created_at|date:"d M Y" }}
-            <strong>Ordernummer {{ order.id }}</strong>
-            <ul class="flex w-full px-[4px] mx-[4px] text-md text-gray-600 gap-[120px] overflow-scroll ">
+            <div class="order_details">
+                <strong>Ordernummer {{ order.id }}</strong>
+                <h3>Status:
+                    <strong>
+                    {% if order.paid %}
+                        Betaald
+                    {% else %}
+                        Onbetaal
+                    {% endif %}
+                    </strong> </h3>
+            </div>
+            <ul class="order_items">
                 {% for item in order.items.all %}
                 {% if item.product and item.product.id %}
                 <a href="{% url 'product_detail' product_id=item.product.id  %}">
-                    <li class="flex flex-row gap-[4px] w-[320px]"><img src="{{ item.product.image.url }}"
-                                                                       alt="{{item.product}}" class="w-[80px] "> {{ item.quantity }} × {{ item.product }} (€{{ item.price }})
+                    <li class="order_item">
+                        <img src="{{ item.product.image.url }}" alt="{{item.product}}" class="item_image">
+                        {{ item.quantity }} × {{ item.product }} (€{{ item.price }})
                     </li>
                 </a>
                 {% else %}
@@ -32,6 +43,7 @@
                 {% endfor %}
             </ul>
         </li>
+        <span class="onder_line"></span>
         {% endfor %}
     </ul>
     {% else %}
