@@ -927,7 +927,7 @@ body {
             }
 
             article {
-                margin-top: 50px;
+                margin: 50px 120px 6px 6px;
                 .second_header {
                     font-size: 18px;
                     top:3rem;
@@ -946,6 +946,7 @@ body {
                 }
 
                 .items_container {
+                    margin-bottom: 50px;
                     .section_title {
                         font-size: 16px;
                     }

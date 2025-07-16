@@ -109,7 +109,7 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
 
 # Redirect
-LOGIN_URL = '/login/'
+LOGIN_URL = '/accounts/login/'
 LOGGED_OUT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
