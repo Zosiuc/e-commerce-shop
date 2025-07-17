@@ -27,6 +27,11 @@
         <li class="new">New</li>
         {% endif %}
     </ul>
+    <form method="post" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+        <button class="add" type="submit">+</button>
+    </form>
+    <span class="break"></span>
 
     {% endif %}
 </section>

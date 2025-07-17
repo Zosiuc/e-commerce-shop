@@ -2,20 +2,32 @@
 {% load static %}
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <!-- Basis: character set + viewport -->
     <meta charset="UTF-8">
-    <meta name="title" content="Zosiuc OnLine"/>
-    <meta name="description"
-          content=" e-commerce shop"/>
-
-
-    <link rel="icon" href="{% static 'shop/images/favicon.png' %}" type="image/png"/>
-    <link rel="alternate icon" href="{% static 'shop/images/icon.png' %}" type="image/png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="favicon" href="{% static 'shop/images/favicon.png' %}" type="image/png+xml"/>
-    <link rel="alternate favicon" href="{% static 'shop/images/favicon.svg' %}" type="image/svg+xml"/>
-    <meta property="og:icon" content="{% static 'shop/images/favicon.png' %}"/>
+
+    <!-- SEO -->
+    <title>{% block title %} Zosiuc OnLine {% endblock %}</title>
+    <meta name="title" content="Zosiuc OnLine">
+    <meta name="description" content="E-commerce shop">
+    <meta property="scrollBehavior" content="smooth"/>
+
+    <!-- Favicons -->
+    <link rel="icon" href="{% static 'shop/images/favicon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'shop/images/favicon.svg' %}" type="image/svg+xml">
+
+    <!-- Voor Apple apparaten -->
+    <link rel="apple-touch-icon" href="{% static 'shop/images/apple-touch-icon.png' %}">
+
+    <!-- Open Graph (voor social media preview) -->
+    <meta property="og:title" content="Zosiuc OnLine">
+    <meta property="og:description" content="E-commerce shop">
+    <meta property="og:image" content="{% static 'shop/images/og-image.png' %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zosiuc.nl">
+
+    <!-- static -->
     <link rel="stylesheet" href="{% static 'shop/css/global.css' %}">
-    <title>{% block title %} Shop {% endblock %}</title>
     <script src="{% static 'shop/js/script.js' %}"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
 

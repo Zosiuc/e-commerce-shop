@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 897.02 895.67">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #00a651;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill: none;
+        stroke-miterlimit: 10;
+        stroke-width: 15px;
+      }
+
+      .cls-2 {
+        stroke: #231f20;
+      }
+
+      .cls-3 {
+        stroke: #1c75bc;
+      }
+
+      .cls-4 {
+        stroke: #ed1c24;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <line class="cls-3" x1="627.19" y1="849.24" x2="673.26" y2="727.18"/>
+    <line class="cls-3" x1="500.87" y1="773.57" x2="604.33" y2="855.56"/>
+    <line class="cls-3" x1="290.49" y1="856.33" x2="391.05" y2="774.33"/>
+    <line class="cls-3" x1="220.08" y1="729.04" x2="266.04" y2="849.65"/>
+    <line class="cls-3" x1="47.72" y1="628.54" x2="167.49" y2="675.82"/>
+    <line class="cls-3" x1="120.7" y1="503.87" x2="40.15" y2="604.87"/>
+    <line class="cls-3" x1="40.17" y1="293.22" x2="120.62" y2="393.77"/>
+    <line class="cls-3" x1="167.52" y1="221.86" x2="46.3" y2="270.08"/>
+    <line class="cls-3" x1="266.96" y1="46.4" x2="220.15" y2="168.56"/>
+    <line class="cls-3" x1="392.47" y1="121.94" x2="289.88" y2="40.15"/>
+    <line class="cls-3" x1="604.4" y1="40.19" x2="502.54" y2="121.8"/>
+    <line class="cls-3" x1="673.29" y1="168.56" x2="627.19" y2="46.43"/>
+    <line class="cls-3" x1="850.22" y1="267.19" x2="726.03" y2="221"/>
+    <line class="cls-3" x1="773.13" y1="392.29" x2="857.23" y2="289.25"/>
+    <line class="cls-3" x1="856.74" y1="604.97" x2="772.95" y2="501.61"/>
+    <line class="cls-3" x1="725.98" y1="674.53" x2="850.58" y2="627.68"/>
+    <line class="cls-3" x1="636.1" y1="856.56" x2="856.65" y2="636"/>
+    <line class="cls-3" x1="294.17" y1="869.96" x2="600.07" y2="869.96"/>
+    <line class="cls-3" x1="40.14" y1="636.32" x2="258.84" y2="855.02"/>
+    <line class="cls-3" x1="27.06" y1="297.63" x2="27.06" y2="600.48"/>
+    <line class="cls-3" x1="259.75" y1="41.64" x2="39.88" y2="261.52"/>
+    <line class="cls-3" x1="599.98" y1="27.61" x2="294.27" y2="27.61"/>
+    <line class="cls-3" x1="854.66" y1="259.58" x2="635.59" y2="40.51"/>
+    <line class="cls-3" x1="869.41" y1="600.48" x2="869.41" y2="293.35"/>
+    <line class="cls-1" x1="205.52" y1="390.86" x2="205.52" y2="247.51"/>
+    <line class="cls-1" x1="205.52" y1="649.95" x2="205.52" y2="506.6"/>
+    <line class="cls-1" x1="386.95" y1="688.92" x2="246.4" y2="688.92"/>
+    <line class="cls-1" x1="641.43" y1="688.92" x2="500.87" y2="688.92"/>
+    <line class="cls-1" x1="687.7" y1="503.38" x2="687.7" y2="648.23"/>
+    <line class="cls-1" x1="687.7" y1="247.62" x2="687.7" y2="392.48"/>
+    <line class="cls-1" x1="507.15" y1="206.74" x2="646.82" y2="206.74"/>
+    <line class="cls-1" x1="246.4" y1="206.74" x2="386.07" y2="206.74"/>
+    <circle class="cls-2" cx="447.82" cy="446.88" r="116.02"/>
+    <circle class="cls-4" cx="728.59" cy="446.88" r="70.46"/>
+    <circle class="cls-1" cx="687.7" cy="688.92" r="40.88"/>
+    <circle class="cls-1" cx="687.7" cy="206.74" r="40.88"/>
+    <circle class="cls-3" cx="869.41" cy="273.24" r="20.11"/>
+    <circle class="cls-3" cx="620.09" cy="27.61" r="20.11"/>
+    <circle class="cls-3" cx="274.15" cy="27.61" r="20.11"/>
+    <circle class="cls-3" cx="27.61" cy="277.52" r="20.11"/>
+    <circle class="cls-3" cx="27.61" cy="620.6" r="20.11"/>
+    <circle class="cls-3" cx="274.15" cy="868.05" r="20.11"/>
+    <circle class="cls-3" cx="620.09" cy="868.05" r="20.11"/>
+    <circle class="cls-3" cx="869.41" cy="620.6" r="20.11"/>
+    <circle class="cls-1" cx="205.52" cy="206.74" r="40.88"/>
+    <circle class="cls-1" cx="205.52" cy="690.83" r="40.88"/>
+    <circle class="cls-4" cx="447.56" cy="165.86" r="70.46"/>
+    <circle class="cls-4" cx="164.63" cy="448.79" r="70.46"/>
+    <circle class="cls-4" cx="445.66" cy="729.81" r="70.46"/>
+    <line class="cls-4" x1="678.96" y1="397.25" x2="497.27" y2="215.56"/>
+    <line class="cls-4" x1="496.5" y1="681.13" x2="680.17" y2="497.45"/>
+    <line class="cls-4" x1="214.44" y1="498.59" x2="396.93" y2="678.92"/>
+    <line class="cls-4" x1="397.86" y1="215.56" x2="214.38" y2="399.05"/>
+  </g>
+</svg>
