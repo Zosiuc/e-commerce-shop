@@ -80,7 +80,7 @@
             <ul class="orders">
                 {% for order in recent_orders %}
                 <li class="order">
-                    <strong>Payment {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
+                    <strong>Order #{{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
                     <ul class="order_items">
                         {% for item in order.items.all %}
                         <li class="order_item">
