@@ -54,3 +54,21 @@ class Banner(models.Model):
 
     def __str__(self):
         return self.title + ' - ' + self.description
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, blank=True, default=8)
+
+
+class FavoriteItem(models.Model):
+    favorite = models.ForeignKey(Favorite, related_name='items', on_delete=models.SET_NULL, null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)

@@ -7,9 +7,9 @@
 {% block article %}
 
 <nav class="second_header">
-    <h1>Producten</h1>
+    <h1>Products</h1>
     <a href="{% url 'view_cart' %}">
-        <button>Winkelmandje</button>
+        <button>Cart</button>
     </a>
 </nav>
 
@@ -20,7 +20,7 @@
     <a class="product " href="{% url 'product_detail' product.id %}">
         <div>
             <h2 class="product_name ">{{ product.name }}</h2>
-            <p class="product_price ">Prijs: €{{ product.price }}</p>
+            <p class="product_price ">Price: €{{ product.price }}</p>
         </div>
         <div class="product_image">
         {% if product.image %}
@@ -34,7 +34,7 @@
         </form>
     </a>
     {% empty %}
-    <p>Geen producten gevonden.</p>
+    <p>no products were found.</p>
     {% endfor %}
 </div>
 

@@ -7,7 +7,7 @@
 
 <nav class="second_header">
     <h1>Winkelmand</h1>
-    <a href="{% url 'product_list' 'all' %}">← Terug naar producten</a>
+    <a href="{% url 'product_list' 'all' %}">← Back to products</a>
 </nav>
 
 
@@ -41,20 +41,20 @@
             </div>
             <form method="post" action="{% url 'remove_from_cart' item.product.id %}">
                 {% csrf_token %}
-                <button class="delete_button" type="submit"><strong> X </strong>Verwijder</button>
+                <button class="delete_button" type="submit"><strong> X </strong>Remove</button>
             </form>
         </li>
         {% endfor %}
     </ul>
     {% else %}
-    <p>Winkelmandje is leeg.</p>
+    <p>Cart is empty.</p>
     {% endif %}
     <nav class="pay_nav">
-        <p><strong>Totaal:</strong> €{{ total_price }}</p>
+        <p><strong>Total:</strong> €{{ total_price }}</p>
         <form method="post" action="{% url 'create_checkout_session' %}">
             {% csrf_token %}
             <button class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-                ✅ Betaal met Stripe
+                ✅ Pay with Stripe
             </button>
         </form>
     </nav>

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} favorites {% endblock %}
+
+{% block article %}
+
+<nav class="second_header">
+    <h2> favoriets </h2>
+    <a href="{% url 'home' %}">← Back to home</a>
+</nav>
+<div class="favorites my_container">
+    {% if favorites %}
+    {% for favorite in favorites %}
+    <div class="favorites_group">
+        <strong>{{ favorite.group }}</strong>
+        {% for item in favorite.items.all %}
+        <a href="{% url 'product_detail' item.product.id %}" class="group_product">
+            <img src="{{ item.product.image.url }}" alt="{{product.name}}">
+            <div class="product_info">
+                <h2>{{ item.product.name }}</h2>
+                <i>€{{ item.product.price }}</i>
+                <p>{{ item.product.description }}</p>
+            </div>
+
+        </a>
+        <form method="post" action="{% url 'add_to_cart' item.product.id %}">
+            {% csrf_token %}
+            <button class="header_button" type="submit">
+                <img src="{% static 'shop/images/add.svg' %}" alt="">
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    {% else %}
+    <strong>No favorites yet</strong>
+    {% endif %}
+</div>
+
+
+
+{% endblock article %}

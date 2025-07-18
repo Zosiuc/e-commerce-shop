@@ -29,8 +29,8 @@
 
     <section class="items_container">
         <nav class="section_title">
-            <h2>Assortment</h2>
-            <a rel="shop" href="{% url 'product_list' 'all' %}">see all </a>
+            <h2>Categories</h2>
+            <a rel="shop" href="{% url 'product_list' 'all' %}"> See all →</a>
         </nav>
 
         <div class="items ">
@@ -50,7 +50,7 @@
     <section class="items_container">
         <nav class="section_title">
             <h2>New added</h2>
-            <a rel="new" href="{% url 'product_list' 'new' %}">see all </a>
+            <a rel="new" href="{% url 'product_list' 'new' %}"> See all →</a>
         </nav>
 
         <div class="items">
@@ -73,15 +73,14 @@
 
         <nav class="section_title">
             <h2> recent orders</h2>
-            <a href="{% url 'my_orders' %}">Bekijk alle
-                bestellingen →</a>
+            <a href="{% url 'my_orders' %}"> See all →</a>
         </nav>
         {% if recent_orders %}
         <div class="items">
             <ul class="orders">
                 {% for order in recent_orders %}
                 <li class="order">
-                    <strong>Bestelling {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
+                    <strong>Payment {{ order.id }}</strong> {{ order.created_at|date:"d M Y" }}
                     <ul class="order_items">
                         {% for item in order.items.all %}
                         <li class="order_item">

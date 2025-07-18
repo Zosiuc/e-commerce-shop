@@ -3,12 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product, Order, OrderItem, Category, Banner  # pas aan op basis van je model
+
+from .form import AddToFavoritesForm
+from .models import Product, Order, OrderItem, Category, Banner, Group, \
+    Favorite, FavoriteItem
 from django.views.decorators.http import require_POST, require_GET
 import stripe
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.urls import reverse
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -246,3 +249,44 @@ def banners(request, banner):
             Q()
         )
     return render(request, 'store/banners.html', {'banner': banner, 'products':products})
+
+
+@login_required
+def add_to_favorites(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == "POST":
+        form = AddToFavoritesForm(request.user, request.POST)
+        if form.is_valid():
+            group = form.cleaned_data['group']
+            new_group_name = form.cleaned_data['new_group']
+
+            # Als nieuwe groep opgegeven is, ophalen of aanmaken
+            if new_group_name:
+                group, _ = Group.objects.get_or_create(name=new_group_name, user=request.user)
+
+            # Als geen groep gekozen of opgegeven, gebruik of maak 'Default'
+            if not group:
+                group, _ = Group.objects.get_or_create(name="Default", user=request.user)
+
+            # Nu we zeker weten wat de juiste groep is:
+            favorite, _ = Favorite.objects.get_or_create(user=request.user, group=group)
+
+            # Voeg product toe aan favorites
+            FavoriteItem.objects.get_or_create(favorite=favorite, product=product)
+
+            return redirect('product_detail', product_id=product.id)
+    else:
+        form = AddToFavoritesForm(request.user)
+
+    return render(request, 'store/add_to_favorites.html', {
+        'form': form,
+        'product': product
+    })
+
+
+@login_required
+def view_favorites(request):
+    favorites = Favorite.objects.filter(user=request.user)
+
+    return render(request, 'store/favorites.html', {'favorites': favorites})

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}  Add to favorites {% endblock %}
+
+{% block article %}
+
+<nav class="second_header">
+    <h2>Add to favoriets</h2>
+    <a href="{% url 'product_detail' product.id %}">← Back to product details</a>
+</nav>
+<div class="form ">
+    <h2>{{ product.name }}</h2>
+    <form method="post" >
+        {% csrf_token %}
+
+        <label>Existing Group:</label><br>
+        {{ form.group }}<br><br>
+
+        <label>Or make a new group :</label><br>
+        {{ form.new_group }}<br><br>
+
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+
+
+{% endblock article %}

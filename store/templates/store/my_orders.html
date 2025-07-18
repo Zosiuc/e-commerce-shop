@@ -7,7 +7,7 @@
 
 <nav class="second_header">
     <h1>Recent Orders</h1>
-    <a href="{% url 'home' %}">← Terug naar Home</a>
+    <a href="{% url 'home' %}">← Back to home</a>
 </nav>
 
 <section class="my_orders my_container">
@@ -17,13 +17,13 @@
         <li class="order">
             {{ order.created_at|date:"d M Y" }}
             <div class="order_details">
-                <strong>Ordernummer {{ order.id }}</strong>
+                <strong>Order number {{ order.id }}</strong>
                 <h3>Status:
                     <strong>
                     {% if order.paid %}
-                        Betaald
+                        Paid
                     {% else %}
-                        Onbetaal
+                        Unpaid
                     {% endif %}
                     </strong> </h3>
             </div>
@@ -37,7 +37,7 @@
                     </li>
                 </a>
                 {% else %}
-                <span class="text-red-500">No product found</span>
+                <span class="text-red-500">no products were found.</span>
                 {% endif %}
 
                 {% endfor %}

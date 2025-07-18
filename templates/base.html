@@ -44,13 +44,16 @@
                     <img src="{%  static 'shop/images/menu.png' %}" alt="aside icon" class="menu_icon"/>
                 </button>
                 <div class="search_container">
-                    <button class="search_button" id="search_button" onclick="toggleSearch_bar()">
+                    <button class="header_button" id="search_button" onclick="toggleSearch_bar()">
                         <img src="{%  static 'shop/images/search.png' %}" alt="search icon" class="search_icon" id="search_icon"/>
                         <label class="search_bar" id="search_bar">
                             <input type="search" id="zoekveld" placeholder="Zoek producten..." class="veld" oninput="zoek()" />
                         </label>
                     </button>
                 </div>
+                <a href="{% url 'favorites' %}" class="header_button">
+                    <img src="{% static 'shop/images/fav.png' %}" alt="favorite icon"/>
+                </a>
             </div>
             <a rel="home" href="{% url 'home' %}" class="main_icon">
             <img src="{% static 'shop/images/icon.png' %}" alt="main icon"></a>
@@ -58,9 +61,9 @@
 
         <p class="greet_p" id="greet_p">
             {% if user.is_authenticated %}
-            Welkom, {{ user.username }}!
+            Welcome, {{ user.username }}!
             {% else %}
-            Welkom to Zosiuc Online!
+            Welcome to Zosiuc Online!
             {% endif %}
         </p>
         <ul id="resultaten" class="hidden"></ul>
@@ -83,11 +86,11 @@
 
             {% if user.is_authenticated %}
             <ul class="profile_links">
-                <a class="aside_link" href="{% url 'password_change' %}">Wachtwoord wijzigen</a>
-                <a class="aside_link" href="{% url 'password_reset' %}">Wachtwoord resetten</a>
+                <a class="aside_link" href="{% url 'password_change' %}">Change Password</a>
+                <a class="aside_link" href="{% url 'password_reset' %}">Reset Password</a>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="aside_link">Uitloggen</button>
+                    <button type="submit" class="aside_link">Logout</button>
                 </form>
             </ul>
 
@@ -104,14 +107,14 @@
         <div class="contact">
             <strong>Contact</strong>
             <ul class="contact_links">
-                <li class="aside_link"><a href="/contact/">Klant Service</a></li>
+                <li class="aside_link"><a href="/contact/">Customer Service</a></li>
             </ul>
         </div>
 
     </aside>
     <article>
     {% block article %}
-    <!-- Subpagina's vullen deze ruimte -->
+
     {% endblock article %}
     </article>
 </main>

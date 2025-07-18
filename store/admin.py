@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Category, Order, OrderItem, Banner
+from .models import Product, Category, Order, OrderItem, Banner, Favorite, FavoriteItem, Group
 from django.utils.html import format_html
 
 # Register your models here.
@@ -42,3 +42,20 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'description', 'image', 'link']
+
+
+class FavoriteInline(admin.TabularInline):
+    model = FavoriteItem
+    readonly_fields = ['product']
+    extra = 1
+
+
+@admin.register(Favorite)
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user','group']
+    inlines = [FavoriteInline]
+
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']

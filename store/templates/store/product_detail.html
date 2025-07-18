@@ -7,6 +7,7 @@
 
 <nav class="second_header">
     <h1>Product Details</h1>
+    <a href="{% url 'home' %}">← Back to home</a>
 </nav>
 
 <section class="product_details my_container">
@@ -19,7 +20,7 @@
     </div>
 
     <ul class="details">
-        <li>Artikel Name: <strong> {{product.name}}</strong></li>
+        <li>Article Name: <strong> {{product.name}}</strong></li>
         <li>Price: <strong> €{{product.price}}</strong></li>
         <li>Category: {{product.category.name}}</li>
         <li>Description: {{product.description}}</li>
@@ -27,10 +28,17 @@
         <li class="new">New</li>
         {% endif %}
     </ul>
-    <form method="post" action="{% url 'add_to_cart' product.id %}">
-        {% csrf_token %}
-        <button class="add" type="submit">+</button>
-    </form>
+    <div class="buttons">
+        <form method="post" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button class="header_button" type="submit">
+                <img src="{% static 'shop/images/add.svg' %}" alt="">
+            </button>
+        </form>
+        <a href="{% url 'add_to_favorites' product.id %}" class="header_button">
+            <img src="{% static 'shop/images/fav.png' %}" alt="fav icon">
+        </a>
+    </div>
     <span class="break"></span>
 
     {% endif %}

@@ -16,6 +16,8 @@ urlpatterns = [
     path('contact/', views.contact_view, name='contact'),
     path('complaint/', views.complaint_view, name='complaint'),
     path('banners/<str:banner>', views.banners, name='banners'),
+    path('product/<int:product_id>/add-to-favorites/', views.add_to_favorites, name='add_to_favorites'),
+    path('favorites/', views.view_favorites, name='favorites'),
 
     path('api/zoeken/', views.zoek_producten, name='zoek_producten'),
 ]
